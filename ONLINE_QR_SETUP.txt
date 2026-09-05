@@ -1,0 +1,16 @@
+SMARTATTEND - READY FOR PUBLIC QR
+
+The teacher QR automatically points to the public Student Portal URL of the site where teacher.html is hosted. The current 1-minute session code is added to the QR link.
+
+FASTEST DEPLOYMENT
+1. Unzip this folder.
+2. Upload the folder to any static HTTPS host (Netlify Drop is a simple option, or GitHub Pages).
+3. Open the hosted teacher.html page.
+4. Start a session.
+5. Scan the QR with a phone on any Wi-Fi or mobile-data connection.
+6. Student Portal opens directly and the current code is already filled in.
+
+IMPORTANT
+The ZIP itself cannot be a public website. The one-time hosting step is required for phones on different networks. Once hosted, students do not need to enter a URL or be on the same network.
+
+This demo uses browser localStorage for attendance data. For true cross-device live attendance, a shared backend/database is required.

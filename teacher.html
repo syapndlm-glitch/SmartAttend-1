@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>SmartAttend | Teacher Command Center</title><link rel="stylesheet" href="style.css"></head>
+<body class="dashboard-body">
+<div class="topbar"><a href="index.html" class="brand"><span>SA</span> SmartAttend</a><div class="live-pill"><i></i> LIVE CLASSROOM</div></div>
+<main class="dashboard">
+  <section class="intro"><div><p class="eyebrow">TEACHER COMMAND CENTER</p><h1>Good morning, <span>Professor.</span></h1><p>DBMS · CSE S3 · Attendance session</p></div><div class="date-card"><small>SESSION STATUS</small><strong id="sessionStatus">READY</strong></div></section>
+  <section class="grid">
+    <div class="card session-card">
+      <div class="card-head"><div><small class="label">ACTIVE ATTENDANCE CODE</small><h2 id="code">------</h2></div><button class="icon-btn" onclick="copyCode()">Copy code</button></div>
+      <div class="timer-wrap"><div class="timer-ring"><div><strong id="timer">1:00</strong><small>remaining</small></div></div><div><p class="big-label">Session window</p><p class="muted">The code refreshes automatically every 60 seconds.</p><button class="start-btn" onclick="startAttendance()">Start / Refresh Session</button></div></div>
+    </div>
+    <div class="card qr-panel"><div class="card-head"><div><small class="label">INSTANT CHECK-IN</small><h3>Scan to enter</h3></div><span class="secure">SECURE</span></div><div id="qrcode" class="qrcode"></div><p>Scan to open the Student Portal directly. The current 1-minute code is included automatically.</p><div id="qrLink" class="qr-link"></div></div>
+    <div class="card stat-card"><small class="label">PRESENT TODAY</small><div class="stat-number" id="count">0</div><div class="progress"><span id="progressBar"></span></div><p>Live attendance count</p></div>
+    <div class="card stat-card accent-card"><small class="label">SESSION</small><div class="stat-number">60<span>s</span></div><p>Automatic code rotation</p></div>
+  </section>
+  <section class="card attendance-card"><div class="card-head"><div><small class="label">REAL-TIME ROSTER</small><h2>Attendance activity</h2></div><span class="live-text">Updating live</span></div><div class="table-wrap"><table><thead><tr><th>ROLL NO.</th><th>STUDENT</th><th>CHECK-IN TIME</th><th>STATUS</th></tr></thead><tbody id="attendanceTable"></tbody></table></div></section>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><script src="config.js"></script><script src="script.js"></script></body></html>
