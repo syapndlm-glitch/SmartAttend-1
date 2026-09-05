@@ -3,10 +3,11 @@ function randomCode() {
   return Math.random().toString(36).substring(2, 8).toUpperCase();
 }
 
-// Global timer state
+// Global timer and roster state
 let timer = 60;
 let sessionCode = "";
 let timerInterval = null;
+let totalPresent = 0;
 
 // Get target URL for QR Code generation
 function getStudentUrl() {
@@ -127,9 +128,9 @@ function listenForAttendance() {
   const count = document.getElementById("count");
   if (!table) return;
 
-  // Clear existing static rows
+  // Clear existing static rows & reset count tracker
   table.innerHTML = "";
-  let totalPresent = 0;
+  totalPresent = 0;
 
   // Real-time Firebase listener
   database.ref("attendance").on("child_added", (snapshot) => {
@@ -142,7 +143,7 @@ function listenForAttendance() {
     row.insertCell(2).innerText = new Date(data.timestamp).toLocaleTimeString();
     row.insertCell(3).innerText = "PRESENT";
 
-    // Update live count badge
+    // Increment global count
     totalPresent++;
     if (count) count.innerText = totalPresent;
   });
@@ -154,8 +155,12 @@ function clearAttendance() {
     .then(() => {
       const table = document.getElementById("attendanceTable");
       if (table) table.innerHTML = "";
+      
+      // Reset global counter and element UI
+      totalPresent = 0;
       const count = document.getElementById("count");
       if (count) count.innerText = "0";
+      
       alert("Attendance roster reset successfully!");
     })
     .catch((error) => {
