@@ -1,4 +1,37 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>SmartAttend | Student Check-in</title><link rel="stylesheet" href="style.css"></head>
-<body class="student-body"><div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
-<main class="student-shell"><a href="index.html" class="brand"><span>SA</span> SmartAttend</a><div class="student-card"><div class="step">01 / CHECK-IN</div><h1>Mark your <span>attendance.</span></h1><p>Enter your details and the one-minute code shown by your teacher.</p><div class="form-grid"><label>Roll Number<input id="roll" placeholder="e.g. CS031" autocomplete="off"></label><label>Student Name<input id="name" placeholder="Your full name" autocomplete="name"></label></div><label>Attendance Code<input id="session" class="code-input" placeholder="6-character code" maxlength="6" autocomplete="off"></label><button class="submit-btn" onclick="markAttendance()">Confirm Attendance</button><div id="result" class="result"></div><div class="hint">Scanned QR detected. The current session code has been filled automatically.</div></div></main><script src="script.js"></script></body></html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>SmartAttend | Student Check-in</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="student-body">
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+  <main class="student-shell">
+    <a href="index.html" class="brand"><span>SA</span> SmartAttend</a>
+    <div class="student-card">
+      <div class="step">01 / CHECK-IN</div>
+      <h1>Mark your <span>attendance.</span></h1>
+      <p>Enter your details and the one-minute code shown by your teacher.</p>
+      <div class="form-grid">
+        <label>Roll Number<input id="roll" placeholder="e.g. CS031" autocomplete="off"></label>
+        <label>Student Name<input id="name" placeholder="Your full name" autocomplete="name"></label>
+      </div>
+      <label>Attendance Code<input id="session" class="code-input" placeholder="6-character code" maxlength="6" autocomplete="off"></label>
+      <button class="submit-btn" onclick="markAttendance()">Confirm Attendance</button>
+      <div id="result" class="result"></div>
+      <div class="hint">Scanned QR detected. The current session code has been filled automatically.</div>
+    </div>
+  </main>
+
+  <!-- Firebase Core SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+  
+  <!-- Project Configuration & Logic -->
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
