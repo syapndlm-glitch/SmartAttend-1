@@ -6,6 +6,7 @@ function randomCode() {
 // Global timer state
 let timer = 60;
 let sessionCode = "";
+let timerInterval = null;
 
 // Get target URL for QR Code generation
 function getStudentUrl() {
@@ -29,21 +30,47 @@ function generateQR() {
   new QRCode(qr, { text: target, width: 128, height: 128 });
 }
 
-// Generate new code
+// Start active 60-second countdown interval
+function startTimer() {
+  if (timerInterval) clearInterval(timerInterval);
+  
+  updateTimer();
+  timerInterval = setInterval(() => {
+    if (timer > 0) {
+      timer--;
+      updateTimer();
+    } else {
+      generateNewCode(); // Auto-rotate code when timer reaches zero
+    }
+  }, 1000);
+}
+
+// Generate new session code and reset timer
 function generateNewCode() {
   sessionCode = randomCode();
   localStorage.setItem("sessionCode", sessionCode);
   timer = 60;
+  
   const codeBox = document.getElementById("code");
   if (codeBox) codeBox.innerText = sessionCode;
-  updateTimer();
+  
+  startTimer();
   generateQR();
 }
 
-// Update remaining session time
+// Manual button trigger for starting or refreshing session
+function startAttendance() {
+  generateNewCode();
+}
+
+// Update remaining session time on page UI
 function updateTimer() {
   const t = document.getElementById("timer");
-  if (t) t.innerText = Math.floor(timer / 60) + ":" + String(timer % 60).padStart(2, "0");
+  if (t) {
+    const minutes = Math.floor(timer / 60);
+    const seconds = String(timer % 60).padStart(2, "0");
+    t.innerText = `${minutes}:${seconds}`;
+  }
 }
 
 // Copy session code to clipboard
@@ -113,6 +140,7 @@ function listenForAttendance() {
     row.insertCell(0).innerText = data.roll || "N/A";
     row.insertCell(1).innerText = data.name || "N/A";
     row.insertCell(2).innerText = new Date(data.timestamp).toLocaleTimeString();
+    row.insertCell(3).innerText = "PRESENT";
 
     // Update live count badge
     totalPresent++;
@@ -137,12 +165,13 @@ function clearAttendance() {
 
 // Initial setup on page load
 document.addEventListener("DOMContentLoaded", () => {
-  // Auto-fill active code on teacher load
+  // Setup teacher dashboard
   if (document.getElementById("code")) {
     sessionCode = localStorage.getItem("sessionCode") || randomCode();
     localStorage.setItem("sessionCode", sessionCode);
     document.getElementById("code").innerText = sessionCode;
-    updateTimer();
+    
+    startTimer();
     generateQR();
     listenForAttendance();
   }
