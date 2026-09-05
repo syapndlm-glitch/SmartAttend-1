@@ -27,6 +27,17 @@ setInterval(loadAttendance,1000);loadAttendance();
 if(document.getElementById("code")){document.getElementById("code").innerText=localStorage.getItem("sessionCode")||"------";updateTimer();generateQR();}
 if(document.getElementById("session")){const qrSession=new URLSearchParams(window.location.search).get("session");if(qrSession){document.getElementById("session").value=qrSession.toUpperCase();document.body.classList.add("qr-entry");const roll=document.getElementById("roll");if(roll)roll.focus();}}
 function clearAttendance() {
-  localStorage.removeItem("attendanceData"); // Clears the saved entries
-  location.reload(); // Refreshes the page to show an empty table
+  localStorage.removeItem("attendanceData");
+  
+  const table = document.getElementById("attendanceTable");
+  if (table) {
+    table.innerHTML = "";
+  }
+
+  const count = document.getElementById("count");
+  if (count) {
+    count.innerText = "0";
+  }
+
+  location.reload();
 }
