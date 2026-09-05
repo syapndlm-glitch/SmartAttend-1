@@ -10,30 +10,36 @@
 <body class="teacher-body">
   <div class="ambient ambient-one"></div>
   <div class="ambient ambient-two"></div>
-  <div class="dashboard-layout">
-    <aside class="sidebar">
+
+  <div class="dashboard-shell">
+    <aside class="control-panel">
       <a href="index.html" class="brand"><span>SA</span> SmartAttend</a>
-      <div class="sidebar-card">
-        <div class="card-label">ACTIVE SESSION</div>
-        <div id="code" class="session-code">------</div>
-        <div class="timer-badge">Expires in <span id="timer">01:00</span></div>
-        <div id="qrcode" class="qr-box"></div>
-        <div class="action-stack">
-          <button class="btn btn-primary" onclick="generateNewCode()">Generate New Code</button>
-          <button class="btn btn-secondary" onclick="copyCode()">Copy Code</button>
+      
+      <div class="panel-card">
+        <span class="eyebrow">ACTIVE SESSION</span>
+        <div id="code" class="code-display">------</div>
+        <p class="timer-text">Expires in <span id="timer">01:00</span></p>
+
+        <div class="qr-wrapper">
+          <div id="qrcode"></div>
+        </div>
+
+        <div class="panel-actions">
+          <button class="action-btn primary" onclick="generateNewCode()">Generate New Code</button>
+          <button class="action-btn secondary" onclick="copyCode()">Copy Code</button>
         </div>
       </div>
     </aside>
 
-    <main class="main-content">
-      <header class="dashboard-header">
+    <main class="data-panel">
+      <header class="panel-header">
         <div>
-          <p class="eyebrow">LIVE MONITOR</p>
+          <span class="eyebrow">LIVE MONITOR</span>
           <h1>Class Attendance Roster</h1>
         </div>
-        <div class="header-actions">
-          <div class="counter"><span id="count">0</span> Students Present</div>
-          <button class="btn btn-danger" onclick="clearAttendance()">Reset Roster</button>
+        <div class="header-right">
+          <div class="badge"><span id="count">0</span> Students Present</div>
+          <button class="action-btn danger" onclick="clearAttendance()">Reset Roster</button>
         </div>
       </header>
 
@@ -47,7 +53,7 @@
             </tr>
           </thead>
           <tbody id="attendanceTable">
-            <!-- Real-time student rows will appear here -->
+            <!-- Real-time student rows render here -->
           </tbody>
         </table>
       </div>
